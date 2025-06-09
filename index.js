@@ -517,7 +517,7 @@ app.use((req, res, next) => {
 });
 app.use(
   session({
-    secret: 'SECRET',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
   })
