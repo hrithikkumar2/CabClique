@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <title>Cab Clique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #c6f1e7, #e1f7d5);
+      color: #2c3e50;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .logo-container img {
+      height: 45px;
+    }
+
+    .cab-clique {
+      font-family: 'Carter One', cursive;
+      font-size: 2.5rem;
+      color: #2c3e50;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #0077ff;
+      text-decoration: underline;
+    }
+
+    .button-10 {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #56ccf2, #2f80ed);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button-10:hover {
+      background: linear-gradient(to right, #2f80ed, #56ccf2);
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2rem 5%;
+    }
+
+    .text-content {
+      flex: 1;
+      min-width: 280px;
+      animation: fadeInLeft 1s ease-in-out;
+    }
+
+    .tagline {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .find {
+      font-weight: bold;
+      color: #1f2937;
+    }
+
+    .book {
+      color: #e67e22;
+    }
+
+    .easily {
+      color: #0077ff;
+    }
+
+    .with-vitians span:last-child {
+      color: #0077ff;
+    }
+
+    .image-15-icon {
+      flex: 1;
+      max-width: 500px;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      animation: fadeInRight 1.5s ease-in-out;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1rem 5%;
+      background-color: #ffffffcc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: #2c3e50;
+    }
+
+    footer a {
+      color: #2c3e50;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #0077ff;
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----------- Responsive Design ----------- */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .main-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .cab-clique {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+
+      footer a {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="styles/pngwing.com.png" alt="Cab Clique Logo" />
+      <div class="cab-clique">CAB CLIQUE</div>
+    </div>
+    <nav>
+      <!-- <a href="#">Create Group</a> -->
+      <!-- The Button -->
+<a href="#" onclick="openGuide()" style="cursor: pointer; ">New Here?</a>
+
+<!-- The Guide Modal -->
+<div id="guideModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000;">
+  <div style="background:white; padding:20px; max-width:600px; margin:8% auto; border-radius:10px; position:relative; font-family: Arial, sans-serif;">
+    <span onclick="closeGuide()" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; font-weight: bold;">&times;</span>
+    <h2 style="margin-top:0;">How to Use Cab Clique</h2>
+    <p>Welcome to Cab Clique! Here’s how you can use the site after login:</p>
+    <ul>
+      <li><strong>Join a Group:</strong> Find a group going your way and send a message with your contact details and a message to the group uploader.</li>
+      <li><strong>Group Owner:</strong> If you created a group, check your message box to see join requests from other students. You can contact them to coordinate rides.</li>
+      <li><strong>Create a Group:</strong> If no suitable group exists, create your own and share your ride details.</li>
+      <li><strong>View Profiles:</strong> Click on any username to see the profile/about section of the person who uploaded the group.</li>
+      <li><strong>Edit Profile:</strong> You can update your own profile information in the profile section.</li>
+    </ul>
+    <p>Enjoy hassle-free shared rides and save on travel costs!</p>
+  </div>
+</div>
+
+<script>
+  function openGuide() {
+    document.getElementById('guideModal').style.display = 'block';
+  }
+  
+  function closeGuide() {
+    document.getElementById('guideModal').style.display = 'none';
+  }
+</script>
+
+     
+      <button id="loginButton" class="button-10">Login / Sign Up</button>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="text-content">
+  <div class="tagline" style="font-size: 2.5rem; font-weight: 600; line-height: 1.4; color: #333;">
+    <span class="find" style="color: #007bff;">Share</span> your ride, 
+    <span class="book" style="color: #28a745;">split the cost</span> <br>
+    <span class="easily" style="color: #ff5722;">smarter travel</span> for Vitian's
+  </div>
+  <p class="with-vitians" style="margin-top: 0.5rem; font-size: 1.2rem; color: #555;">
+    <span class="find" style="font-weight: 600; color: #007bff;">With</span> 
+    <span style="font-style: italic;">Vitian’s</span>
+  </p>
+</div>
+
+    <img class="image-15-icon" src="styles/ChatGPT Image Jun 3, 2025, 12_10_36 PM.png" alt="Cab Service Illustration" />
+  </main>
+
+  <footer>
+    <div>© 2025 Cab Clique. All rights reserved.</div>
+    <div>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("loginButton").addEventListener("click", function () {
+      window.location.href = "/login";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cab Clique - Login / Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #c6f1e7, #e1f7d5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      max-width: 420px;
+      width: 100%;
+      padding: 3rem 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .logo h1 {
+      font-family: 'Carter One', cursive;
+      font-size: 2.5rem;
+      color: #2c3e50;
+    }
+
+    .headline {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #2c3e50;
+    }
+
+    .btn {
+      background: linear-gradient(to right, #56ccf2, #2f80ed);
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      margin: 0.6rem 0;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #2f80ed, #56ccf2);
+    }
+
+    .signup-text {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #2c3e50;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 2rem;
+      }
+      .headline {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <img src="styles/pngwing.com.png" alt="Cab Clique Logo" />
+      <h1>CAB CLIQUE</h1>
+    </div>
+
+    <div class="headline">Welcome! Sign in to continue</div>
+
+    <!-- Sign In -->
+    <button class="btn" onclick="location.href='/auth/google'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" fill="none" width="20" height="20">
+        <path fill="#4285F4" d="M533.5 278.4c0-18.2-1.6-35.8-4.8-52.8H272v99.9h146.9c-6.3 33.7-25.4 62.4-54.4 81.5v67.7h87.8c51.4-47.4 81.2-117.3 81.2-196.3z"/>
+        <path fill="#34A853" d="M272 544.3c73.5 0 135.3-24.3 180.4-65.7l-87.8-67.7c-24.3 16.3-55.4 25.8-92.6 25.8-71 0-131.3-47.8-153-112.2H29.4v70.7C74.3 490.5 167.7 544.3 272 544.3z"/>
+        <path fill="#FBBC05" d="M119 323.3c-6.4-19.5-6.4-40.5 0-60l-70.3-54.3v-.1H29.4v70.7h.1l89.5 68.9z"/>
+        <path fill="#EA4335" d="M272 107.7c39.7 0 75.4 13.7 103.6 40.8l77.7-77.7C405.7 24.6 344.7 0 272 0 167.7 0 74.3 53.8 29.4 136.7l89.5 68.9c21.7-64.4 82-112.2 153-112.2z"/>
+      </svg>
+      Sign In with Google
+    </button>
+
+    <div class="signup-text">Don't have an account?</div>
+
+    <!-- Sign Up -->
+    <button class="btn" onclick="location.href='/auth/google?signup=true'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" fill="none" width="20" height="20">
+        <path fill="#4285F4" d="M533.5 278.4c0-18.2-1.6-35.8-4.8-52.8H272v99.9h146.9c-6.3 33.7-25.4 62.4-54.4 81.5v67.7h87.8c51.4-47.4 81.2-117.3 81.2-196.3z"/>
+        <path fill="#34A853" d="M272 544.3c73.5 0 135.3-24.3 180.4-65.7l-87.8-67.7c-24.3 16.3-55.4 25.8-92.6 25.8-71 0-131.3-47.8-153-112.2H29.4v70.7C74.3 490.5 167.7 544.3 272 544.3z"/>
+        <path fill="#FBBC05" d="M119 323.3c-6.4-19.5-6.4-40.5 0-60l-70.3-54.3v-.1H29.4v70.7h.1l89.5 68.9z"/>
+        <path fill="#EA4335" d="M272 107.7c39.7 0 75.4 13.7 103.6 40.8l77.7-77.7C405.7 24.6 344.7 0 272 0 167.7 0 74.3 53.8 29.4 136.7l89.5 68.9c21.7-64.4 82-112.2 153-112.2z"/>
+      </svg>
+      Sign Up with Google
+    </button>
+  </div>
+</body>
+</html>

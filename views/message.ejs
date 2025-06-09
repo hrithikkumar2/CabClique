@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cab Clique - All Messages</title>
+  <link rel="stylesheet" href="/styles/style33.css" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" />
+  <style>
+    /* Container for messages */
+    @media (max-width: 600px) {
+  .header.main-header,
+  header.main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .logo-container {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .button-10 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .greeting {
+    text-align: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .message-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    width: 90%;
+    margin: 1rem auto;
+  }
+
+  .filter-container input {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .message-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 1rem;
+  }
+
+  .message-card img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .message-info strong {
+    font-size: 1rem;
+  }
+
+  .message-text {
+    font-size: 0.9rem;
+  }
+
+  .delete-btn {
+    position: static;
+    align-self: flex-end;
+    transform: none;
+    margin-top: 0.5rem;
+  }
+
+  .about-section {
+    margin: 0.8rem 0 1.2rem 0;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-container {
+    margin-top: 0.5rem;
+  }
+}
+
+    .message-container {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem 2rem;
+    }
+    /* Filter input styling */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem auto 2rem;
+      max-width: 600px;
+      gap: 1rem;
+    }
+    .filter-container input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .filter-container input:focus {
+      border-color: #00c292;
+      outline: none;
+    }
+    /* Message card style */
+    .message-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid #eee;
+      transition: box-shadow 0.3s;
+      position: relative;
+    }
+    .message-card:hover {
+      box-shadow: 0 4px 12px rgba(0,194,146,0.3);
+      background-color: #f9fffb;
+    }
+    .message-card img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00c292;
+    }
+    .message-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .message-info strong {
+      font-size: 1.1rem;
+      color: #008060;
+      margin-bottom: 0.3rem;
+    }
+    .message-text {
+      color: #555;
+      white-space: pre-line;
+      font-size: 0.95rem;
+    }
+    /* About section, toggled */
+    .about-section {
+      margin: 0.8rem 0 1.2rem 70px;
+      padding: 0.7rem 1rem;
+      font-style: italic;
+      color: #444;
+      background: #e1f7d5;
+      border-radius: 10px;
+      display: none;
+    }
+    /* Delete button inside message card */
+    .delete-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #f44336;
+      border: none;
+      color: white;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background-color 0.3s;
+      z-index: 10;
+    }
+    .delete-btn:hover {
+      background-color: #d32f2f;
+    }
+    /* Header & nav from your previous page */
+    header.main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .logo-img {
+      height: 50px;
+    }
+    .cab-clique-title {
+      font-family: 'Carter One', cursive;
+      font-size: 1.8rem;
+      color: #333;
+    }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .button-10 {
+      background-color: #00c292;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+    }
+    .button-10:hover {
+      background-color: #00a37a;
+    }
+    .greeting {
+      font-weight: 600;
+      color: #333;
+    }
+    .profile-container img.profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #00c292;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo-container">
+      <img src="/styles/pngwing.com.png" alt="Logo" class="logo-img" />
+      <div class="cab-clique-title">CAB CLIQUE</div>
+    </div>
+    <div class="nav-buttons">
+     <button class="button-10" id="joinButton">Join</button>
+        <button class="button-10" id="creategroup">creategroup</button>
+        <button class="button-10" id="yourgrp">Your Group</button>
+        <button class="button-10" id="homebutton">Home</button>
+        <button class="button-10" id="profileButton">Profile</button>
+        <button class="button-10" id="logoutbutton">Logout</button>
+      <div class="greeting">Hey, <%= username %>!</div>
+      <div class="profile-container">
+        <a href="/group/myprofile">
+          <img src="<%= profilepic || '/images/default-profile.png' %>" alt="Profile Picture" class="profile-pic" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="filter-container">
+    <input
+      type="text"
+      id="searchName"
+      placeholder="Search by username..."
+      aria-label="Search messages by username"
+    />
+  </section>
+
+  <div class="message-container" id="messagesList">
+    <% if (messages.length === 0) { %>
+      <p>No messages found.</p>
+    <% } else { %>
+      <% messages.forEach((msg) => { %>
+        <% if (msg.username) { %>
+          <div class="message-card" data-username="<%= msg.username.toLowerCase() %>" onclick="toggleAbout('<%= msg.username.toLowerCase() %>')">
+            <img src="<%= msg.profilepic || '/images/default-profile.png' %>" alt="Profile" />
+            <div>
+              <strong><%= msg.username %></strong><br />
+              <span><%= msg.message.replace(/\n/g, '<br>') %></span>
+            </div>
+            <button
+              class="delete-btn"
+              onclick="event.stopPropagation(); deleteMessage('<%= msg.id %>', '<%= msg.username.toLowerCase() %>')
+"
+              aria-label="Delete message from <%= msg.username %>"
+            >
+              Delete
+            </button>
+          </div>
+          <div id="about-<%= msg.username.toLowerCase() %>" class="about-section">
+            <strong>About <%= msg.username %>:</strong> <%= msg.about %>
+          </div>
+        <% } %>
+      <% }) %>
+    <% } %>
+  </div>
+
+  <script>
+    // Navigation buttons
+    document.getElementById("joinButton").onclick = () => window.location.href = "/joingroup";
+      document.getElementById("logoutbutton").onclick = () => window.location.href = "/logout";
+      document.getElementById("creategroup").onclick = () => window.location.href = "/group";
+      document.getElementById("yourgrp").onclick = () => window.location.href = "/yourgroup";
+      document.getElementById("profileButton").onclick = () => window.location.href = "/group/myprofile";
+      document.getElementById("homebutton").onclick = () => window.location.href = "/";
+    // Toggle About section on message click by username
+    function toggleAbout(username) {
+      const about = document.getElementById(`about-${username}`);
+      if (!about) return;
+      about.style.display = about.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Filter messages by username
+    document.getElementById('searchName').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const messages = document.querySelectorAll('.message-card');
+  messages.forEach(card => {
+    const username = card.getAttribute('data-username');
+    card.style.display = username.includes(searchTerm) ? 'flex' : 'none';
+    const index = Array.from(messages).indexOf(card);
+    const about = document.getElementById(`about-${index}`);
+    if (!username.includes(searchTerm) && about) about.style.display = 'none';
+  });
+});
+
+
+    // Delete message function
+    function deleteMessage(id, username) {
+      alert(username);
+      if (confirm('Are you sure you want to delete this message?')) {
+        
+        fetch(`/delete-message/${id}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            // Remove message card and about section from DOM by username
+            const card = document.querySelector(`.message-card[data-username="${username}"]`);
+            if (card) card.remove();
+            const about = document.getElementById(`about-${username}`);
+            if (about) about.remove();
+            alert('Message deleted successfully');
+          } else {
+            alert('Failed to delete message');
+          }
+        })
+        .catch(err => {
+          console.error('Delete error:', err);
+          alert('Error deleting message');
+        });
+      }
+    }
+  </script>
+</body>
+</html>

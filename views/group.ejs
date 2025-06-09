@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="/styles/style22.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" />
+    <title>Create Group | Cab Clique</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="styles/pngwing.com.png" alt="Cab Clique Logo" class="logo-img" />
+        <div class="cab-clique-title">CAB CLIQUE</div>
+      </div>
+      <nav class="nav-buttons">
+        
+        <button class="button-10" id="joinButton">Join</button>
+        <button class="button-10" id="messagebutton">Message</button>
+        <button class="button-10" id="yourgrp">Your Group</button>
+        <button class="button-10" id="homebutton">Home</button>
+        <button class="button-10" id="profileButton">Profile</button>
+        <button class="button-10" id="logoutbutton">Logout</button>
+        <div class="greeting">Hey, <%= username %>!</div>
+        <div class="profile-container">
+          <a href="/group/myprofile">
+  <img src="<%= profilepic %>" alt="Profile Picture" class="profile-pic" />
+</a>
+
+        </div>
+      </nav>
+    </header>
+
+    <main class="group-create-section">
+      <h1 class="create-group-heading">Create Group</h1>
+      <div class="form-wrapper">
+        <img class="illustration-img" src="styles/—Pngtree—hand painted cartoon lovely college_3942677.png" alt="Illustration" />
+        <form action="/create" method="post" class="group-form">
+          <input class="input-field" name="vacancy" placeholder="Vacancy" type="number" required />
+          <input class="input-field" name="time" placeholder="Time (HH:MM:SS)" type="text" required />
+          <input class="input-field" name="date" placeholder="Date" type="date" required />
+          <input class="input-field" name="from_location" placeholder="From" type="text" required />
+          <input class="input-field" name="to_location" placeholder="Destination" type="text" required />
+          <select class="input-field" name="type" required>
+            <option value="">Select Cab or Auto</option>
+            <option value="car">Cab</option>
+            <option value="auto">Auto</option>
+          </select>
+          <button type="submit" class="submit-button">Create</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      document.getElementById("joinButton").onclick = () => window.location.href = "/joingroup";
+      document.getElementById("logoutbutton").onclick = () => window.location.href = "/logout";
+      document.getElementById("messagebutton").onclick = () => window.location.href = "/messages";
+      document.getElementById("yourgrp").onclick = () => window.location.href = "/yourgroup";
+      document.getElementById("profileButton").onclick = () => window.location.href = "/group/myprofile";
+      document.getElementById("homebutton").onclick = () => window.location.href = "/";
+    </script>
+  </body>
+</html>

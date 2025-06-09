@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h2>Chat between <%= sender %> and <%= receiver %></h2>
+  <div id="chat-box" style="border:1px solid #ccc; height:300px; overflow:auto;"></div>
+  <form id="chat-form">
+    <input id="message" autocomplete="off" placeholder="Type message..." />
+    <button>Send</button>
+  </form>
+
+  <script>
+    const socket = io();
+    const chatBox = document.getElementById('chat-box');
+    const form = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message');
+    const sender = "<%= sender %>";
+    const receiver = "<%= receiver %>";
+
+    // Join a private room based on the sender and receiver
+    const roomId = [sender, receiver].sort().join('_');
+    socket.emit('join', roomId);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value;
+      if (message) {
+        socket.emit('chat message', { roomId, message, sender, receiver });
+        messageInput.value = '';
+      }
+    });
+
+    socket.on('chat message', (data) => {
+      const div = document.createElement('div');
+      div.textContent = `${data.sender}: ${data.message}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

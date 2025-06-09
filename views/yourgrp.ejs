@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cab Clique - My Groups</title>
+    <link rel="stylesheet" href="/styles/yourgrp.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 12px;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover, .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="main-header">
+      <div class="logo-container">
+        <img src="/styles/pngwing.com.png" class="logo-img" />
+        <div class="cab-clique-title">CAB CLIQUE</div>
+      </div>
+      <div class="nav-buttons">
+        <button id="homebutton" class="button-10">Home</button>
+        <button id="creategroup" class="button-10">Create Group</button>
+        <button id="joingroup" class="button-10">Join Group</button>
+        <div class="greeting">Hey, <%= username %>!</div>
+        <div class="profile-container">
+          <a href="/group/myprofile">
+            <img src="<%= profilepic %>" alt="Profile Picture" class="profile-pic" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter -->
+    <section class="filter-section">
+      <input type="text" id="origin" placeholder="From..." class="input-field" />
+      <input type="text" id="destination" placeholder="To..." class="input-field" />
+      <button onclick="filterBoxes()" class="button-10">Filter</button>
+    </section>
+
+    <!-- Group Listings -->
+    <section class="container">
+      <% data.forEach(entry => { %>
+        <div class="tab1" id="entry-<%= entry.id %>">
+          <% if (entry.type === 'auto') { %>
+            <img src="/styles/Screenshot_2024-03-18_182109-removebg-preview (8).png" alt="Auto" />
+          <% } else if (entry.type === 'car') { %>
+            <img src="/styles/car.png" alt="Car" />
+          <% } %>
+          <div class="part2">
+            <p>
+              Vacancy: <%= entry.vacancy %><br />
+              Time: <%= entry.time %><br />
+              From: <%= entry.from_location %><br />
+              To: <%= entry.to_location %><br />
+              Date: <%= entry.date ? new Date(entry.date).toISOString().split('T')[0] : 'N/A' %><br />
+              Type: <%= entry.type %>
+            </p>
+          </div>
+          <button class="btn-join" onclick="deleteEntry('<%= entry.id %>')">Delete</button>
+        </div>
+      <% }); %>
+    </section>
+
+    <!-- Edit Modal (optional if used) -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>Edit Entry</h2>
+        <form id="editForm">
+          <label for="editVacancy">Vacancy:</label>
+          <input type="text" id="editVacancy"><br>
+          <label for="editTime">Time:</label>
+          <input type="text" id="editTime"><br>
+          <label for="editFrom">From:</label>
+          <input type="text" id="editFrom"><br>
+          <label for="editTo">To:</label>
+          <input type="text" id="editTo"><br>
+          <label for="editDate">Date:</label>
+          <input type="text" id="editDate"><br>
+          <label for="editType">Type:</label>
+          <input type="text" id="editType"><br>
+          <button type="button" onclick="submitEdit()">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      document.getElementById("homebutton").onclick = () => window.location.href = "/";
+      document.getElementById("creategroup").onclick = () => window.location.href = "/group";
+        document.getElementById("joingroup").onclick = () => window.location.href = "/joingroup";
+
+      function filterBoxes() {
+        const origin = document.getElementById("origin").value.trim().toLowerCase();
+        const destination = document.getElementById("destination").value.trim().toLowerCase();
+        const tabs = document.querySelectorAll(".tab1");
+
+        tabs.forEach(tab => {
+          const text = tab.querySelector(".part2 p").innerText.toLowerCase();
+          const fromLoc = text.match(/from:\s*([^\n]+)/)?.[1] || "";
+          const toLoc = text.match(/to:\s*([^\n]+)/)?.[1] || "";
+          const matches = (!origin || fromLoc.includes(origin)) && (!destination || toLoc.includes(destination));
+          tab.style.display = matches ? "flex" : "none";
+        });
+      }
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Enter") filterBoxes();
+      });
+
+      function deleteEntry(id) {
+        if (confirm('Are you sure you want to delete this entry?')) {
+          fetch(`/delete-entry/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              document.getElementById(`entry-${id}`).remove();
+              alert('Entry deleted successfully');
+            } else {
+              alert('Failed to delete entry');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        }
+      }
+
+      function closeEditModal() {
+        document.getElementById("editModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

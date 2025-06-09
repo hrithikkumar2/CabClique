@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #c6f1e7, #e1f7d5);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #2c3e50;
+    }
+
+    .profile-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #333;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.8px solid #ccc;
+      font-size: 15px;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #56ccf2;
+      background: white;
+      box-shadow: 0 0 6px rgba(86, 204, 242, 0.3);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .profile-pic-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .profile-pic-section img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00c292;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .file-input-label {
+      background: linear-gradient(to right, #56ccf2, #2f80ed);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .file-input-label:hover {
+      background: linear-gradient(to right, #2f80ed, #56ccf2);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    button[type="submit"] {
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #6c63ff, #4b45c6);
+      color: white;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(to right, #4b45c6, #6c63ff);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <h1>Edit Profile</h1>
+    <form action="/updateProfile" method="POST" enctype="multipart/form-data">
+      <label for="username">Name</label>
+      <input type="text" id="username" name="username" value="<%= user.username %>" maxlength="50" required />
+
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" value="<%= user.phone %>" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number" required />
+
+      <label for="about">About</label>
+      <textarea id="about" name="about" placeholder="Write something about yourself..." maxlength="300"><%= user.about %></textarea>
+
+      <label>Profile Picture</label>
+      <div class="profile-pic-section">
+        <img id="preview" src="<%= user.profilepic || '/images/default-profile.png' %>" alt="Profile Picture" />
+        <label for="profilepic" class="file-input-label">Change Picture</label>
+        <input type="file" id="profilepic" name="profilepic" accept="image/*" />
+      </div>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById("profilepic");
+    const previewImg = document.getElementById("preview");
+
+    fileInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
