@@ -226,6 +226,15 @@ app.get('/auth/google/group',
   })
 );
 
+app.get("/test-db", async (req, res) => {
+  try {
+    const result = await db.query("SELECT NOW()");
+    res.send("✅ Database Connected! Current Time: " + result.rows[0].now);
+  } catch (err) {
+    console.error("❌ Database connection error:", err);
+    res.status(500).send("❌ Database connection failed.");
+  }
+});
 
 app.get('/group/myprofile', async (req, res) => {
   try {
