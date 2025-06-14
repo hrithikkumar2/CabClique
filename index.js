@@ -479,7 +479,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'https://cabclique.onrender.com/auth/google/group',
+      callbackURL: 'https://cabclique-1.onrender.com/auth/google/group',
       userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
     },
     async (accessToken, refreshToken, profile, cb) => {
