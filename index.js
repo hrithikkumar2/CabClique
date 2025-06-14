@@ -226,13 +226,17 @@ app.get('/auth/google/group',
   })
 );
 
-app.get("/test-db", async (req, res) => {
+app.get('/tables', async (req, res) => {
   try {
-    const result = await db.query("SELECT NOW()");
-    res.send("✅ Database Connected! Current Time: " + result.rows[0].now);
+    const result = await db.query(`
+      SELECT table_name 
+      FROM information_schema.tables 
+      WHERE table_schema = 'public'
+    `);
+    res.json(result.rows);
   } catch (err) {
-    console.error("❌ Database connection error:", err);
-    res.status(500).send("❌ Database connection failed.");
+    console.error("Error fetching tables:", err);
+    res.status(500).send("Error");
   }
 });
 
