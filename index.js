@@ -226,19 +226,7 @@ app.get('/auth/google/group',
   })
 );
 
-app.get('/tables', async (req, res) => {
-  try {
-    const result = await db.query(`
-      SELECT table_name 
-      FROM information_schema.tables 
-      WHERE table_schema = 'public'
-    `);
-    res.json(result.rows);
-  } catch (err) {
-    console.error("Error fetching tables:", err);
-    res.status(500).send("Error");
-  }
-});
+
 
 app.get('/group/myprofile', async (req, res) => {
   try {
@@ -444,6 +432,7 @@ app.get(
     scope: ["profile", "email"],
   })
 );
+
 passport.use(
   'local',
   new Strategy(async function verify(username, password, cb) {
@@ -501,6 +490,8 @@ passport.use(
     }
   )
 );
+
+
 app.use((req, res, next) => {
   res.set(
     "Cache-Control",

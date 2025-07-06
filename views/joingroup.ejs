@@ -83,14 +83,27 @@
     </section>
 
     <!-- Modal -->
-    <div id="messageModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeMessageModal()">&times;</span>
-        <h2>Send Message</h2>
-        <textarea id="messageText" placeholder="Enter your message"></textarea>
-        <button id="sendMessageButton">Send</button>
-      </div>
-    </div>
+    <!-- Modal -->
+<div id="messageModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeMessageModal()">&times;</span>
+    <h2>Send Message with Your Contact Info</h2>
+    
+   <input
+  type="tel"
+  id="phoneNumber"
+  class="input-field"
+  placeholder="Enter 10-digit phone number"
+  pattern="[0-9]{10}"
+  maxlength="10"
+  required
+/>
+    <textarea id="messageText" placeholder="Write your message here..."></textarea>
+    
+    <button id="sendMessageButton">Send</button>
+  </div>
+</div>
+
     <!-- Uploader Profile Modal -->
 <div id="profileModal" class="modal">
   <div class="modal-content">
@@ -127,29 +140,45 @@
         document.getElementById("messageModal").style.display = "none";
       }
 
-      document.getElementById("sendMessageButton").addEventListener("click", () => {
-        const message = document.getElementById("messageText").value;
-        if (!message || !currentUserId) {
-          alert("Please enter a message.");
-          return;
-        }
+     document.getElementById("sendMessageButton").addEventListener("click", () => {
+  const message = document.getElementById("messageText").value.trim();
+  const phoneNumber = document.getElementById("phoneNumber").value.trim();
 
-        fetch("/sendMessage", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: currentUserId, message }),
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            alert("Message sent successfully!");
-            closeMessageModal();
-          } else {
-            alert("Failed to send message.");
-          }
-        })
-        .catch(err => console.error("Error:", err));
-      });
+  // Regex: only 10 digits
+  const phoneRegex = /^\d{10}$/;
+
+  if (!message) {
+    alert("Please enter your message.");
+    return;
+  }
+
+  if (!phoneRegex.test(phoneNumber)) {
+    alert("Please enter a valid 10-digit phone number (numbers only).");
+    return;
+  }
+
+  const fullMessage = `Phone: ${phoneNumber}${message}`;
+
+  fetch("/sendMessage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId: currentUserId, message: fullMessage }),
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert("Message sent successfully!");
+        closeMessageModal();
+        document.getElementById("messageText").value = "";
+        document.getElementById("phoneNumber").value = "";
+      } else {
+        alert("Failed to send message.");
+      }
+    })
+    .catch(err => console.error("Error:", err));
+});
+
+
 
       function filterBoxes() {
         const origin = document.getElementById("origin").value.trim().toLowerCase();
