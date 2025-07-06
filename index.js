@@ -61,7 +61,7 @@ app.get('/chat/:sender/:receiver', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login.ejs');
 });
-('/register', (req, res) => {
+app.get('/register', (req, res) => {
   res.render('login.ejs');
 });
 
